@@ -282,6 +282,23 @@
             word-break: break-word;
         }
 
+        .msg-text a {
+            color: var(--gold2);
+            text-decoration: underline;
+            text-decoration-color: rgba(201, 168, 76, 0.4);
+            transition: all 0.15s;
+        }
+
+        .msg-text a:hover {
+            color: var(--gold);
+            text-decoration-color: var(--gold);
+        }
+
+        .msg-text i, .msg-text em {
+            font-style: italic;
+            color: var(--gold2);
+        }
+
         /* ── Message Actions ── */
         .msg-actions {
             display: flex;
@@ -640,13 +657,16 @@
             div.id = id;
             div.dataset.text = text;
 
+            // AI messages render HTML (italic, links), user messages are escaped
+            const contentHtml = role === 'ai' ? text : escapeHtml(text);
+
             div.innerHTML = `
       <div class="msg-meta">
         <span class="msg-label">${label}</span>
         <span class="msg-time">${getTime()}</span>
       </div>
       <div class="msg-bubble">
-        <div class="msg-text">${escapeHtml(text)}</div>
+        <div class="msg-text">${contentHtml}</div>
       </div>
       <div class="msg-actions">
         ${role === 'ai' ? `
