@@ -8,10 +8,17 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.static('public'));
 
+// Serve index.html for root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Load rules from resources/rules.json
 function loadRules() {
     try {
-        const rulesPath = path.join(__dirname, 'resources', 'rules.json');
+        // Handle both local and Vercel environments
+        const baseDir = process.env.VERCEL ? path.join(process.cwd(), 'resources') : path.join(__dirname, 'resources');
+        const rulesPath = path.join(baseDir, 'rules.json');
         return JSON.parse(fs.readFileSync(rulesPath, 'utf-8'));
     } catch (err) {
         console.error('Failed to load rules.json:', err.message);
