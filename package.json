@@ -1,0 +1,12 @@
+{
+    "name": "malva-chat",
+    "version": "1.0.0",
+    "description": "Malva AI Humanizer Chat",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}
