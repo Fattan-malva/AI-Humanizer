@@ -116,3 +116,5 @@ app.post('/api/chat', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`\n✦ Malva Humanizer Chat running at http://localhost:${PORT}\n`);
 });
+
+module.exports = app;
